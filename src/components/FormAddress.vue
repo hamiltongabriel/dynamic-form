@@ -8,11 +8,11 @@
       <div class="form-group">
         <label class="form-label" for="delivery_name">Name</label>
         <input
-          v-model="$v.form.recipient.$model"
-          type="text"
-          placeholder="Recipients Name"
-          class="form-control"
-          id="delivery_name"
+                v-model="$v.form.recipient.$model"
+                type="text"
+                placeholder="Recipients Name"
+                class="form-control"
+                id="delivery_name"
         />
         <div v-if="$v.form.recipient.$error" class="error">field is required</div>
       </div>
@@ -20,11 +20,11 @@
       <div class="form-group">
         <label class="form-label" for="address">Address</label>
         <textarea
-          v-model="$v.form.address.$model"
-          placeholder="London Street 470978 New England"
-          rows="3"
-          class="form-control"
-          id="address"
+                v-model="$v.form.address.$model"
+                placeholder="London Street 470978 New England"
+                rows="3"
+                class="form-control"
+                id="address"
         ></textarea>
         <div v-if="$v.form.address.$error" class="error">field is required</div>
       </div>
@@ -33,7 +33,8 @@
 </template>
 
 <script>
-import { required } from "vuelidate/lib/validators";
+import { required } from 'vuelidate/lib/validators'
+
 export default {
   props: {
     wizardData: {
@@ -41,13 +42,13 @@ export default {
       required: true
     }
   },
-  data() {
+  data () {
     return {
       form: {
         address: null,
         recipient: this.wizardData.name
       }
-    };
+    }
   },
   validations: {
     form: {
@@ -60,16 +61,17 @@ export default {
     }
   },
   methods: {
-    submit() {
-      if (!this.$v.$invalid) {
-        this.$emit("update", {
+    submit () {
+      this.$emit('update', {
+        data: {
           recipient: this.form.recipient,
           address: this.form.address
-        });
-      }
+        },
+        valid: !this.$v.$invalid
+      })
     }
   }
-};
+}
 </script>
 
 <style scoped>
