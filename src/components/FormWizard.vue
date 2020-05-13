@@ -1,7 +1,12 @@
 <template>
   <div>
     <keep-alive>
-      <component :is="currentStep" @update="processStep" :wizard-data="form"></component>
+      <component
+        :is="currentStep"
+        @update="processStep"
+        :wizard-data="form"
+        ref="currentStep"
+      ></component>
     </keep-alive>
     <div class="progress-bar">
       <div :style="`width: ${progress}%;`"></div>
@@ -73,7 +78,11 @@ export default {
     },
     goNext () {
       this.currentStepNumber++
-      this.canGoNext = false
+      // this.canGoNext = false
+      // call after the DOM update cycle.
+      this.$nextTick(() => {
+        this.canGoNext = !this.$refs.currentStep.$v.$invalid
+      })
     }
   }
 }

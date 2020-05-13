@@ -6,11 +6,11 @@
 
     <div class="plans">
       <div
-        v-for="plan in plans"
-        :key="plan.price"
-        @click="pickPlan(plan)"
-        :class="{'active-plan': selectedPlan === plan}"
-        class="plan"
+              v-for="plan in plans"
+              :key="plan.price"
+              @click="pickPlan(plan)"
+              :class="{'active-plan': selectedPlan === plan}"
+              class="plan"
       >
         <div class="weight">{{plan.weight}}</div>
         <div class="description">
@@ -28,36 +28,36 @@
 </template>
 
 <script>
-import { required } from "vuelidate/lib/validators";
+import { required } from 'vuelidate/lib/validators'
 
 export default {
-  data() {
+  data () {
     return {
       plans: [
         {
           price: 19,
-          weight: "250g",
-          name: "The Single",
+          weight: '250g',
+          name: 'The Single',
           description:
-            "One bag of freshly roasted coffee beans delivered to your house every month"
+            'One bag of freshly roasted coffee beans delivered to your house every month'
         },
         {
           price: 29,
-          weight: "500g",
-          name: "The Curious",
+          weight: '500g',
+          name: 'The Curious',
           description:
-            "Two different types of freshly roasted coffee every month"
+            'Two different types of freshly roasted coffee every month'
         },
         {
           price: 49,
-          weight: "1kg",
-          name: "The Addict",
+          weight: '1kg',
+          name: 'The Addict',
           description:
-            "Two bags of two different types of freshly roasted coffee every month."
+            'Two bags of two different types of freshly roasted coffee every month.'
         }
       ],
       selectedPlan: null
-    };
+    }
   },
   validations: {
     selectedPlan: {
@@ -65,16 +65,18 @@ export default {
     }
   },
   methods: {
-    pickPlan(plan) {
-      this.selectedPlan = plan;
-
-      this.$emit("update", {
+    pickPlan (plan) {
+      this.selectedPlan = plan
+      this.submit()
+    },
+    submit () {
+      this.$emit('update', {
         data: {
           plan: this.selectedPlan
         },
         valid: !this.$v.$invalid
-      });
+      })
     }
   }
-};
+}
 </script>
