@@ -57,6 +57,9 @@ export default {
     }
   },
   computed: {
+    isLastStep () {
+      return this.currentStepNumber === this.length
+    },
     length () {
       return this.steps.length
     },
